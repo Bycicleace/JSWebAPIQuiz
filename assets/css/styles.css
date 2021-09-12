@@ -56,8 +56,9 @@ main div {
 
 
 /* Classes/Utilities */
-.button {
+.button, .answer {
     background-color: var(--primary-color);
+    font-size: 16px;
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
@@ -65,6 +66,16 @@ main div {
     border: none;
 }
 
-.button:hover {
+.button:hover, .answer:hover {
     background-color: var(--secondary-color);
+}
+
+.answer {
+    width: 40%;
+    text-align: left;
+}
+
+.answerDiv {
+    text-align: left;
+    padding: 5px 0;
 }
