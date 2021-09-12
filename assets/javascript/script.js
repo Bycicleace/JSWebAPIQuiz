@@ -2,7 +2,7 @@ console.log("Script loaded.");
 
 /* TO DO
  X | Set CSS to match styles
-   | Create Questions (Collection of Objects)
+ X | Create Questions (Collection of Objects)
    | Create Timer function
    | Create "Wrong" and "Correct" functions for footer
    | Create loadQuestion function
