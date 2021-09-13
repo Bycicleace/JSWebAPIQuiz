@@ -52,6 +52,21 @@ main div {
     padding: 10px 25%;
 }
 
+main form {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+main form * {
+    margin: 5px;
+}
+
+main form input {
+    height: 28px;
+    width: 50%;
+}
+
 /* Footer Styles */
 
 
@@ -78,4 +93,12 @@ main div {
 .answerDiv {
     text-align: left;
     padding: 5px 0;
+}
+
+.alignLeft {
+    text-align: left;
+}
+
+.noPadding {
+    padding: 0;
 }
