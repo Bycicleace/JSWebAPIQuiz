@@ -2,9 +2,8 @@
  X | Set CSS to match styles
  X | Create Questions (Collection of Objects)
  X | Create Timer function
-   | Create "Wrong" and "Correct" functions for footer
+ X | Create "Wrong" and "Correct" functions for footer
  X | Create loadQuestion function
-   | Create quizComplete function for when someone answers all questions
  X | Add functionality for when the timer reaches 0.
    | Design High Score page
    | Add functionality to High Score buttons.
