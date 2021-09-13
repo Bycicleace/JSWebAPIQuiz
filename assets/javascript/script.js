@@ -6,7 +6,6 @@
  X | Create loadQuestion function
    | Create quizComplete function for when someone answers all questions
  X | Add functionality for when the timer reaches 0.
-   | Create scoring function to store score
    | Design High Score page
    | Add functionality to High Score buttons.
    | Add functionality to "View high scores" link
@@ -63,7 +62,7 @@ var StartTimer = function(amountOfSeconds) {
             GameOver();
         }
     }, 1000);
-}
+};
 
 var GameOver = function() {
     // Set game over screen.
