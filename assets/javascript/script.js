@@ -20,10 +20,13 @@ var highScores = [];
     Set this to different pages to eventually move back to. Possible values:
         Start
 */
-var lastPage = "Start";
+var lastPage = "start";
 
 // Loads the question at the index provided.
 var LoadQuestion = function(index) {
+    // Sets lastPage to questionIndex
+    lastPage = String(questionIndex);
+
     // Changes main-title to question
     var mainTitle = document.querySelector("#main-title h2");
     mainTitle.textContent = questionsArray[index].question;
@@ -64,7 +67,7 @@ var LoadQuestion = function(index) {
     // clears out main-button
     var mainButton = document.querySelector("#main-button");
     if (mainButton) {
-        mainButton.remove();
+        mainButton.innerHTML = "";
     }
 };
 
@@ -85,6 +88,9 @@ var StartTimer = function(amountOfSeconds) {
 var GameOver = function() {
     // Stop Timer if it's running
     clearInterval(timer);
+
+    // Set lastPage for the Go Back button
+    lastPage = "game-over";
 
     // Set game over screen.
     var mainTitle = document.querySelector("#main-title h2");
@@ -268,8 +274,24 @@ var DisplayHighScores = function() {
 }
 
 var LoadLastScreen = function() {
-    return true;
+    if (lastPage === "start") {
+        // Reloads the page.
+        location.reload();
+    } else if (lastPage === "game-over") {
+        // Goes back to Game Over screen.
+        GameOver();
+    } else if (parseInt(lastPage)) {
+        // Loads the question of that page.
+        questionIndex = lastPage;
+        NextQuestion(parseInt(lastPage));
+    } else {
+        // Not sure what is there, so reload.
+        location.reload();
+    }
 }
+
+
+GetHighScores();
 
 var buttonStart = document.querySelector("#main-button button");
 buttonStart.addEventListener("click", MainHandler);
