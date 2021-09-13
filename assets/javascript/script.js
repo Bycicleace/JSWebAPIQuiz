@@ -313,6 +313,10 @@ document.addEventListener('keydown', function(event) {
     var code = event.code;
     if (code === "Enter") {
         event.preventDefault();
+        var form = document.querySelector("form");
+        if (!(form === null)) {
+            AddScore();
+        }
     }
 })
 
