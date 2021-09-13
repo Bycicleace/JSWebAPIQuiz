@@ -1,4 +1,4 @@
-# JSWebAPIQuiz
+# JavaScript Web API Quiz
 
 ## Description
 A quiz on some fundamentals in Javascript, presented as a web application that uses DOM manipulation through the JavaScript WebAPI calls.
