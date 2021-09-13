@@ -128,12 +128,17 @@ var GameOver = function() {
     submitButton.textContent = "Submit";
     submitButton.addEventListener('click', function(event) {
         event.preventDefault();
+        AddScore();
     });
 
     form.appendChild(labelInitials);
     form.appendChild(textInitials);
     form.appendChild(submitButton);
     mainSubtile.appendChild(form);
+
+    // Clear out button area if present (bug from Go Back at this screen)
+    var mainButton = document.querySelector("#main-button");
+    mainButton.innerHTML = "";
 };
 
 var CorrectAnswer = function() {
@@ -290,6 +295,26 @@ var LoadLastScreen = function() {
     }
 }
 
+var AddScore = function() {
+    var highScoreText = document.querySelector("#textInitials");
+    if (highScoreText.value === "") {
+        alert("You must enter your initials");
+    } else {
+        highScores.push({name: highScoreText.value, score: timerAmount});
+        SortHighScores();
+        SetHighScores();
+        DisplayHighScores();
+        lastPage = "start";
+    }
+}
+
+// Disable 'Enter' key functionality
+document.addEventListener('keydown', function(event) {
+    var code = event.code;
+    if (code === "Enter") {
+        event.preventDefault();
+    }
+})
 
 GetHighScores();
 
