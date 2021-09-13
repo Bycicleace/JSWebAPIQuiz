@@ -4,7 +4,6 @@
     box-sizing: border-box;
     --primary-color: rgb(53,28,117);
     --secondary-color: rgb(189,96,231);
-
 }
 
 body {
@@ -68,7 +67,23 @@ main form input {
 }
 
 /* Footer Styles */
+footer {
+    display:flex;
+}
 
+footer div {
+    text-align: left;
+    width: 100%;
+    padding: 10px 25%;
+}
+
+footer h2 {
+    color: gray;
+    border-top: 1px solid gray;
+    font-style: italic;
+    font-weight: normal;
+    padding: 10px 0 0 0;
+}
 
 /* Classes/Utilities */
 .button, .answer {

@@ -13,6 +13,9 @@
 
 // Global variables
 var timerAmount = 0;
+var totalQuestions = questionsArray.length;
+var questionIndex = 0;
+var timer;
 
 // Loads the question at the index provided.
 var LoadQuestion = function(index) {
@@ -35,6 +38,11 @@ var LoadQuestion = function(index) {
         var answerButton = document.createElement("button");
         answerButton.className = "answer";
         answerButton.textContent = i + 1 + ". " + questionsArray[index].answers[i + 1].answer;
+        if (questionsArray[index].answers[i + 1].isCorrect === true) {
+            answerButton.addEventListener('click',CorrectAnswer);
+        } else if (questionsArray[index].answers[i + 1].isCorrect === false){
+            answerButton.addEventListener('click',IncorrectAnswer);
+        }
         
         // Put button in div
         answerDiv.appendChild(answerButton);
@@ -54,7 +62,7 @@ var StartTimer = function(amountOfSeconds) {
     timerAmount = amountOfSeconds;
     var timerElement = document.querySelector("#timer h2 span");
     timerElement.textContent = timerAmount;
-    var timer = setInterval(function(){
+    timer = setInterval(function(){
         timerAmount--;
         timerElement.textContent = timerAmount;
         if (parseInt(timerAmount) <= 0) {
@@ -65,6 +73,9 @@ var StartTimer = function(amountOfSeconds) {
 };
 
 var GameOver = function() {
+    // Stop Timer if it's running
+    clearInterval(timer);
+
     // Set game over screen.
     var mainTitle = document.querySelector("#main-title h2");
     mainTitle.textContent = "All done!";
@@ -108,3 +119,64 @@ var GameOver = function() {
     form.appendChild(submitButton);
     mainSubtile.appendChild(form);
 };
+
+var CorrectAnswer = function() {
+    // Change Footer
+    var footer = document.querySelector("footer");
+    var footerDiv = document.createElement("div");
+    var footerLabel = document.createElement("h2");
+    footerLabel.textContent = "Correct!";
+
+    footer.innerHTML = ""
+
+    footerDiv.appendChild(footerLabel);
+    footer.appendChild(footerDiv);
+
+    NextQuestion();
+}
+
+var IncorrectAnswer = function() {
+    // Change Footer
+    var footer = document.querySelector("footer");
+    var footerDiv = document.createElement("div");
+    var footerLabel = document.createElement("h2");
+    footerLabel.textContent = "Wrong!";
+
+    footer.innerHTML = ""
+
+    footerDiv.appendChild(footerLabel);
+    footer.appendChild(footerDiv);
+
+    // decrement Timer (Check for < 0)
+    var timerElement = document.querySelector("#timer h2 span");
+    timerAmount -= 10;
+    if (timerAmount < 0) {
+        clearInterval(timer);
+        timerAmount = 0;
+        timerElement.textContent = timerAmount;
+        GameOver();
+    } else {
+        timerElement.textContent = timerAmount;
+        NextQuestion();
+    }
+}
+
+var MainHandler = function() {
+    timerAmount = 100;
+    StartTimer(timerAmount);
+    LoadQuestion(questionIndex);
+    questionIndex++;
+};
+
+var NextQuestion = function() {
+    if (questionIndex >= totalQuestions) {
+        GameOver();
+    } else {
+        LoadQuestion(questionIndex);
+        questionIndex++;
+    }
+}
+
+
+var buttonStart = document.querySelector("#main-button button");
+buttonStart.addEventListener("click", MainHandler);
