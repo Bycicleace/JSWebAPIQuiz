@@ -29,6 +29,9 @@ var LoadQuestion = function(index) {
     mainSubtitle.innerHTML = "";
     mainSubtitle.setAttribute("style", "text-align: left;");
 
+    // Add even to clear footer when mouse moves
+    mainSubtitle.addEventListener('mousemove',ClearFooter);
+
     for (var i = 0; i < Object.keys(questionsArray[index].answers).length; i++) {
         // Create answer button wrapper.
         var answerDiv = document.createElement("div");
@@ -38,6 +41,8 @@ var LoadQuestion = function(index) {
         var answerButton = document.createElement("button");
         answerButton.className = "answer";
         answerButton.textContent = i + 1 + ". " + questionsArray[index].answers[i + 1].answer;
+
+        // Call CorrectAnswer if it's right, IncorrectAnswer if it's wrong.
         if (questionsArray[index].answers[i + 1].isCorrect === true) {
             answerButton.addEventListener('click',CorrectAnswer);
         } else if (questionsArray[index].answers[i + 1].isCorrect === false){
@@ -175,6 +180,11 @@ var NextQuestion = function() {
         LoadQuestion(questionIndex);
         questionIndex++;
     }
+}
+
+var ClearFooter = function() {
+    var footer = document.querySelector("footer");
+    footer.innerHTML = ""
 }
 
 
