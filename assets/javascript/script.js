@@ -15,6 +15,12 @@ var timerAmount = 0;
 var totalQuestions = questionsArray.length;
 var questionIndex = 0;
 var timer;
+var highScores = [];
+/*
+    Set this to different pages to eventually move back to. Possible values:
+        Start
+*/
+var lastPage = "Start";
 
 // Loads the question at the index provided.
 var LoadQuestion = function(index) {
@@ -137,7 +143,7 @@ var CorrectAnswer = function() {
     footer.appendChild(footerDiv);
 
     NextQuestion();
-}
+};
 
 var IncorrectAnswer = function() {
     // Change Footer
@@ -163,7 +169,7 @@ var IncorrectAnswer = function() {
         timerElement.textContent = timerAmount;
         NextQuestion();
     }
-}
+};
 
 var MainHandler = function() {
     timerAmount = 100;
@@ -179,12 +185,34 @@ var NextQuestion = function() {
         LoadQuestion(questionIndex);
         questionIndex++;
     }
-}
+};
 
 var ClearFooter = function() {
     var footer = document.querySelector("footer");
     footer.innerHTML = ""
-}
+};
+
+var GetHighScores = function() {
+    // Get high score from local memory. If there is none, then make it blank
+    var stringHighScores = localStorage.getItem("highScores");
+    if (!(stringHighScores === null)) {
+        highScores = JSON.parse(stringHighScores);
+    } else {
+        highScores = [];
+    }
+};
+
+var SetHighScores = function() {
+    // Stringify high scores array and store it in local memory
+    var stringHighScores = JSON.stringify(highScores);
+    localStorage.setItem("highScores", stringHighScores);
+};
+
+var SortHighScores = function() {
+    highScores = highScores.sort(function(x, y) {
+        return y.score - x.score;
+    });
+};
 
 
 var buttonStart = document.querySelector("#main-button button");
