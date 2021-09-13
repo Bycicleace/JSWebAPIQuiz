@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     --primary-color: rgb(53,28,117);
+    --primary-transparent: rgba(53,28,117,0.25);
     --secondary-color: rgb(189,96,231);
+    --secondary-transparent: rgba(189,96,231,0.5);
 }
 
 body {
@@ -115,5 +117,36 @@ footer h2 {
 }
 
 .noPadding {
+    padding: 0;
+}
+
+.odd {
+    background-color: var(--primary-transparent);
+    color: black;
+    font-weight: bolder;
+    width: 100%;
+    text-align: left;
+}
+
+.even {
+    background-color: var(--secondary-transparent);
+    color: black;
+    font-weight: bolder;
+    width: 100%;
+    text-align: left;
+}
+
+.highScoreDiv {
+    padding: 7px 15px;
+}
+
+.highScoreButton {
+    margin: 0 10px 0 0;
+}
+
+.highScoreButtonDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     padding: 0;
 }

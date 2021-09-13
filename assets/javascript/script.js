@@ -214,6 +214,62 @@ var SortHighScores = function() {
     });
 };
 
+var DisplayHighScores = function() {
+    // Change main-title to be "High scores"
+    var mainTitle = document.querySelector("#main-title h2");
+    mainTitle.textContent = "High scores";
+    mainTitle.className = "alignLeft";
+
+    // Change main-subtitle to be list of high scores"
+    var mainSubtitle = document.querySelector("#main-subtitle");
+    mainSubtitle.innerHTML = "";
+
+    for (var i = 0; i < highScores.length; i++) {
+        var highScoreRowDiv = document.createElement("div");
+        if ((i % 2) == 0) {
+            // index is even
+            highScoreRowDiv.className = "odd highScoreDiv";
+        } else {
+            // index is odd
+            highScoreRowDiv.className = "even highScoreDiv";
+        }
+
+        var highScoreRowP = document.createElement("p");
+        highScoreRowP.textContent = String((i + 1)) + ". " + highScores[i].name + " - " + highScores[i].score
+
+        highScoreRowDiv.appendChild(highScoreRowP);
+        mainSubtitle.appendChild(highScoreRowDiv);
+    }
+
+    // Change main-button to house "Go back" and "Clear high scores" buttons
+    var mainButton = document.querySelector("#main-button");
+    mainButton.innerHTML = "";
+
+    var buttonDiv = document.createElement("div");
+    buttonDiv.className = "alignLeft highScoreButtonDiv";
+    
+    var buttonGoBack = document.createElement("button");
+    buttonGoBack.textContent = "Go back";
+    buttonGoBack.className = "button highScoreButton";
+    buttonGoBack.addEventListener("click", LoadLastScreen);
+
+    var buttonClearScores = document.createElement("button");
+    buttonClearScores.textContent = "Clear high scores";
+    buttonClearScores.className = "button highScoreButton";
+    buttonClearScores.addEventListener('click', function() {
+        highScores = [];
+        SetHighScores();
+        DisplayHighScores();
+    });
+
+    buttonDiv.appendChild(buttonGoBack);
+    buttonDiv.appendChild(buttonClearScores);
+    mainButton.appendChild(buttonDiv);
+}
+
+var LoadLastScreen = function() {
+    return true;
+}
 
 var buttonStart = document.querySelector("#main-button button");
 buttonStart.addEventListener("click", MainHandler);
